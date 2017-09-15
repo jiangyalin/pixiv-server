@@ -85,11 +85,12 @@ function FindPreviousArticle(id) {
 //加载数据
 function FindArticle(id) {
     $.ajax({
-        url : server.http+'/user/user-info/findArticleLabel',
+        url : server.http+'/user/user-info/findUserInfo',
         data : {'id': id},
         type : 'get',
         dataType : 'json',
         success : function (data) {
+            console.log(data)
             $(".j-box").attr("data-id",data.id);
             $(".j-title").text(data.name);
             $(".j-date").text(data.date);

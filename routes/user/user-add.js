@@ -17,8 +17,10 @@ router.post('/addUser',function (req, res) {
     console.log(req.body);
     //插入数据
     let user = {
-        name : req.body.name,
-        pwd : req.body.pwd
+        name: req.body.name,
+        pwd: req.body.pwd,
+        phone: req.body.phone,
+        photo: req.body.photo
     };
     User.create(user, function (err, result) {
         if (err) {

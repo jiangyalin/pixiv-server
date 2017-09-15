@@ -1,14 +1,27 @@
 $(function () {
 
+    // 剪切头像
+    $('.j-photo').click(function () {
+        CanvasAvatar.InitDome();
+        $('#Modal-cae').modal('show');
+    })
 
+    var photo;
+    $('.j-confirm-btn').click(function () {
+        photo = CanvasAvatar.getImg().DataURL;
+        $('#Modal-cae').modal('hide');
+    });
+    
     //提交数据
     $(".j-submit").click(function () {
         var id = $(".j-box").attr("data-id");
         var name = $("#input-name").val();
         var pwd = $("#input-pwd").val();
+        var phone = $("#input-phone").val();
+        console.log('CanvasAvatar', photo);
         // if (id == ''){
             //添加
-            AddUser(name, pwd);
+            AddUser(name, pwd, phone, photo);
         // } else{
         //     //修改
         //     EditArticle(id, title, description, content, label);
@@ -74,10 +87,11 @@ function FindData(id,quill) {
 }
 
 //添加数据
-function AddUser(name, pwd) {
+function AddUser(name, pwd, phone, photo) {
+    console.log('uuuu')
     $.ajax({
         url : server.http+'/user/user-add/addUser',
-        data : {'name': name, 'pwd': pwd},
+        data : {'name': name, 'pwd': pwd, 'phone': phone, 'photo': photo},
         type: 'post',
         dataType: 'json',
         success: function(data){
