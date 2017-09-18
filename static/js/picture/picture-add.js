@@ -3,18 +3,44 @@ $(function () {
     // 图片转码
     var pictures = [];
     $('#input-img').change(function () {
-        var file = this.files[0];
-        var reader = new FileReader(); // 新建空文件属性对象
-        if(file != undefined)reader.readAsDataURL(file); // 传入文件
-        reader.onload = function() {
-            var imgBase64 = reader.result; // 将得到的文件转成data64编码
-            pictures.push(imgBase64);
-        }
+        var file = this.files;
+        var k = ImgBase(file, 0);
+        console.log('k',k);
+        // for (var i = 0; i < file.length; i++) {
+        //     var reader = new FileReader(); // 新建空文件属性对象
+        //     if(file[i] != undefined)reader.readAsDataURL(file[i]); // 传入文件
+        //     reader.onload = function() {
+        //         var imgBase64 = reader.result; // 将得到的文件转成data64编码
+        //         $('.kkk').append('<img src="'+imgBase64+'"/>');
+        //         pictures.push(imgBase64);
+        //         console.log('k')
+        //     }
+        // }
     });
+
+    function ImgBase(fe, index) {
+        console.log('ppp')
+        console.log('fff',fe[index] != undefined)
+        if (fe[index] != undefined) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                console.log('oooo')
+                var imgBase64 = reader.result; // 将得到的文件转成data64编码
+                // $('.kkk').append('<img src="'+imgBase64+'"/>');
+                pictures.push(imgBase64);
+                console.log('k');
+                index++;
+                return ImgBase(fe, index);
+            }
+        }else {
+            return pictures;
+        }
+    }
 
     //提交数据
     $(".j-submit").click(function () {
         var img = pictures;
+        // console.log(img)
         var title = $("#input-title").val();
         var text = $("#input-text").val();
         // var user = $("#input-user").val();

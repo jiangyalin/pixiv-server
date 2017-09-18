@@ -85,7 +85,7 @@ function GetDemo(name) {
                       '<td>'+data.rows[i]._id+'</td>' +
                       '<td>'+data.rows[i].title+'</td>' +
                       '<td>'+data.rows[i].description+'</td>' +
-                      '<td><img src="'+data.rows[i].img+'" style="height: 100px;"/></td>' +
+                      '<td><img src="'+data.rows[i].img[0]+'" style="height: 100px;"/></td>' +
                       '<td>'+data.rows[i].user_id+'</td>' +
                       '<td>'+moment(data.rows[i].date).format('YYYY-MM-DD HH:mm:ss')+'</td>' +
                       '<td>' +
