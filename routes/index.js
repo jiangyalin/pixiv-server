@@ -17,8 +17,6 @@ module.exports = function (app) {
     //文档管理
     app.use('/user',require('./user/index'));
     //标签管理
-    app.use('/label', require('./label/index'));
-    //标签管理
-    app.use('/label',require("./label/index"));
+    app.use('/picture', require('./picture/index'));
 
 };

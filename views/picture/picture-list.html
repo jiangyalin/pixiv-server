@@ -4,13 +4,13 @@
 
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>用户管理</h1>
+        <h1>标签管理</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="/index"><i class="fa fa-dashboard"></i>首页</a>
             </li>
             <li>
-                <a href="/user">用户管理</a>
+                <a href="/picture">插画管理</a>
             </li>
         </ol>
     </section>
@@ -19,7 +19,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="" href="/user/user-add">添加</a>
+                        <a class="" href="/picture/picture-add">添加</a>
                         <div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right j-sch-it" placeholder="试试直接搜索吧">
@@ -36,8 +36,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>用户名</th>
-                                <th>密码</th>
+                                <th>标题</th>
+                                <th>说明文</th>
+                                <th>图片</th>
+                                <th>用户id</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
@@ -63,6 +65,6 @@
 
 <script src="/js/plug-in/pagination/js/pagination.js"></script>
 <script src="/js/plug-in/moment/js/moment.min.js"></script>
-<script src="/js/user/user-list.js"></script>
+<script src="/js/picture/picture-list.js"></script>
 
 <%- include('../footer.html') %>

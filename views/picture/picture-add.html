@@ -1,0 +1,136 @@
+<%- include('../header.html') %>
+<link rel="stylesheet" href="/js/plug-in/dist/css/AdminLTE.min.css"/>
+<link rel="stylesheet" href="/js/plug-in/can-avatar-editor/css/CanvasAvatar.css"/>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>添加插画</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/index"><i class="fa fa-dashboard"></i>首页</a>
+            </li>
+            <li>
+                <a href="/picture">插画管理</a>
+            </li>
+            <li>
+                <a href="/picture/picture-add">添加插画</a>
+            </li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">填写插画信息</h3>
+                        </div>
+                        <form class="form-horizontal" action="#">
+                            <div class="">
+                                <div class="box-body row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="input-img" class="col-sm-2 control-label">选择图片</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" id="input-img">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-text" class="col-sm-2 control-label">说明文</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="input-title" class="col-sm-2 control-label">标题</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-title">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-user" class="col-sm-2 control-label">上传用户</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-default">返回</button>
+                                <button type="button" class="btn btn-info pull-right j-submit">保存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--头像-->
+<div class="modal fade" id="Modal-cae" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 800px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">选择头像</h4>
+            </div>
+            <div class="modal-body col-xs-12">
+                <div class="cae-bd j-cae">
+                    <div class="cae-mn">
+                        <div class="cae-fl j-cae-flr">
+                            <div class="cae-mnc j-cae-mnc j-cae-mnc-s">
+                                <div class="cae-co j-cae-co" caeActive="false">
+                                    <img class="cae-img cae-img-tp cae-img-wi cae-img-he j-cae-img j-cae-img-tp" src="/js/plug-in/can-avatar-editor/img/ion.png" />
+                                    <img class="cae-img cae-img-bm cae-img-wi cae-img-he j-cae-img j-cae-img-bm" src="/js/plug-in/can-avatar-editor/img/ion.png" />
+                                    <div class="cae-mb j-cae-mb"></div>
+                                </div>
+                            </div>
+                            <div class="cae-btn-grp cae-tt">
+                                <p class="cae-tt">当前图片</p>
+                            </div>
+                            <div class="cae-btn-grp cae-rte">
+                                <span class="cae-btn cae-btn-fl j-turn-left" caeActive="false">左转</span>
+                                <span class="cae-btn cae-btn-fr j-turn-right" caeActive="false">右转</span>
+                            </div>
+                            <div class="cae-btn-grp cae-ch">
+                                <div class="cae-sch j-cae-sch">
+                                    <div class="cae-sch-btn j-cae-sch-btn" caeActive="false"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cae-fr j-cae-flr">
+                            <div class="cae-mnc j-cae-mnc-s">
+                                <label class="cae-lel j-cae-lel" for="cae-fle">
+                                    <canvas class="cae-cas" id="cae-canvas" width="1px" height="1px"></canvas>
+                                </label>
+                                <input class="cae-fle" id="cae-fle" type="file" accept="image/png,image/jpg,image/gif" style="display: none;" />
+                            </div>
+                            <div class="cae-btn-grp">
+                                <label class="cae-btn cae-btn-fl" for="cae-fle">图片上传</label>
+                                <span class="cae-btn cae-btn-fr cae-dld j-cae-dld" caeActive="false">图片下载</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cae-tips">
+                        <span class="cae-sn-tp j-cae-tips"></span>
+                        <p class="cae-sn">支持jpg,jpeg,png格式，图片需小于<span class="j-cae-max-size">10</span>M</p>
+                        <img class="kkk" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary j-confirm-btn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/plug-in/can-avatar-editor/js/CanvasAvatar.js"></script>
+<script src="/js/picture/picture-add.js"></script>
+
+<%- include('../footer.html') %>

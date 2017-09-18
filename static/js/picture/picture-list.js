@@ -27,20 +27,20 @@ $(function () {
     //编辑
     $(".j-table-1").on("click", ".j-edit", function () {
         var id = $(this).parents("tr").attr("data-id");
-        window.location.href = '/user/user-add?id='+id;
+        window.location.href = '/picture/picture-add?id='+id;
     });
 
     //查看详情
     $(".j-table-1").on("click",".j-see",function () {
         var id = $(this).parents("tr").attr("data-id");
-        window.location.href = '/user/user-info?id='+id;
+        window.location.href = '/picture/picture-info?id='+id;
     });
 
     //分页
     $(".j-page").pagination({
         pageSize: 5,
         remote: {
-            url: server.http+'/label/findLabelList',
+            url: server.http+'/picture/findPictureList',
             success: function (data) {
                 $(".j-tips").text('共查出'+data.total+'条数据');
                 //列表
@@ -48,7 +48,10 @@ $(function () {
                 for (var i = 0;i<data.rows.length;i++){
                     $(".j-table-1").find("tbody").append('<tr data-id="'+data.rows[i]._id+'">' +
                         '<td>'+data.rows[i]._id+'</td>' +
-                        '<td>'+data.rows[i].name+'</td>' +
+                        '<td>'+data.rows[i].title+'</td>' +
+                        '<td>'+data.rows[i].description+'</td>' +
+                        '<td><img src="'+data.rows[i].img+'" style="height: 100px;"/></td>' +
+                        '<td>'+data.rows[i].user_id+'</td>' +
                         '<td>'+moment(data.rows[i].date).format('YYYY-MM-DD HH:mm:ss')+'</td>' +
                         '<td>' +
                         '<div class="btn-group">' +
@@ -72,24 +75,27 @@ function GetDemo(name) {
     $(".j-page").pagination({
         pageSize: 5,
         remote: {
-            url: server.http+'/label/findLabelList',
+            url: server.http+'/picture/findPictureList',
             params: {"title": name},
             success: function (data) {
                 //列表
                 $(".j-table-1").find("tbody").html('');
                 for (var i = 0;i<data.rows.length;i++){
                     $(".j-table-1").find("tbody").append('<tr data-id="'+data.rows[i]._id+'">' +
-                        '<td>'+data.rows[i]._id+'</td>' +
-                        '<td>'+data.rows[i].title+'</td>' +
-                        '<td>'+moment(data.rows[i].date).format('YYYY-MM-DD HH:mm:ss')+'</td>' +
-                        '<td>' +
-                        '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-xs btn-default j-see">查看</button>' +
-                        '<button type="button" class="btn btn-xs btn-default j-edit">编辑</button>' +
-                        '<button type="button" class="btn btn-xs btn-default j-remove">删除</button>' +
-                        '</div>' +
-                        '</td>' +
-                        '</tr>');
+                      '<td>'+data.rows[i]._id+'</td>' +
+                      '<td>'+data.rows[i].title+'</td>' +
+                      '<td>'+data.rows[i].description+'</td>' +
+                      '<td><img src="'+data.rows[i].img+'" style="height: 100px;"/></td>' +
+                      '<td>'+data.rows[i].user_id+'</td>' +
+                      '<td>'+moment(data.rows[i].date).format('YYYY-MM-DD HH:mm:ss')+'</td>' +
+                      '<td>' +
+                      '<div class="btn-group">' +
+                      '<button type="button" class="btn btn-xs btn-default j-see">查看</button>' +
+                      '<button type="button" class="btn btn-xs btn-default j-edit">编辑</button>' +
+                      '<button type="button" class="btn btn-xs btn-default j-remove">删除</button>' +
+                      '</div>' +
+                      '</td>' +
+                      '</tr>');
                 }
             },
             totalName:'total'
@@ -100,7 +106,7 @@ function GetDemo(name) {
 //删除数据
 function RemoveArticle(id) {
     $.ajax({
-        url: server.http+'/user/removeArticle',
+        url: server.http+'/picture/removePicture',
         data: {'id': id},
         type: 'get',
         dataType: 'json',

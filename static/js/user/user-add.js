@@ -4,7 +4,7 @@ $(function () {
     $('.j-photo').click(function () {
         CanvasAvatar.InitDome();
         $('#Modal-cae').modal('show');
-    })
+    });
 
     var photo;
     $('.j-confirm-btn').click(function () {
@@ -12,7 +12,7 @@ $(function () {
         $('#Modal-cae').modal('hide');
     });
     
-    //提交数据
+    // 提交数据
     $(".j-submit").click(function () {
         var id = $(".j-box").attr("data-id");
         var name = $("#input-name").val();
@@ -24,27 +24,27 @@ $(function () {
             AddUser(name, pwd, phone, photo);
         // } else{
         //     //修改
-        //     EditArticle(id, title, description, content, label);
+        //     EditArticle(id, title, description, content, picture);
         // }
     });
     
-    //取消
+    // 取消
     $(".j-btn-cancel").click(function () {
         window.history.go(-1);
     });
 
 });
 
-//查询所有标签
+// 查询所有标签
 function FindAllLabel() {
     $.ajax({
-        url : server.http+'/label/findAllLabel',
+        url : server.http+'/picture/findAllLabel',
         type: 'get',
         dataType: 'json',
         async: false,
         success: function(data){
             for (var i = 0;i<data.length;i++) {
-                $("#input-label").append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+                $("#input-picture").append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -53,7 +53,7 @@ function FindAllLabel() {
     });
 }
 
-//查询数据
+// 查询数据
 function FindData(id,quill) {
     if (id){
         $.ajax({
@@ -64,11 +64,11 @@ function FindData(id,quill) {
             success: function(data){
                 if (data.label.length) {
                     for (var i = 0; i<data.label.length; i++) {
-                        $("#input-label").find("option[value='"+data.label[i]._id+"']").attr("selected",true);
+                        $("#input-picture").find("option[value='"+data.label[i]._id+"']").attr("selected",true);
                     }
                 }
                 //声明选择器
-                $("#input-label").select2({
+                $("#input-picture").select2({
                     language: "zh-CN"
                 });
                 $("#input-title").val(data.title);
@@ -80,13 +80,13 @@ function FindData(id,quill) {
             }
         });
     } else {
-        $("#input-label").select2({
+        $("#input-picture").select2({
             language: "zh-CN"
         });
     }
 }
 
-//添加数据
+// 添加数据
 function AddUser(name, pwd, phone, photo) {
     console.log('uuuu')
     $.ajax({
@@ -112,7 +112,7 @@ function AddUser(name, pwd, phone, photo) {
     });
 }
 
-//修改数据
+// 修改数据
 function EditArticle(id, title, description, content, label) {
     $.ajax({
         url : server.http+'/user/user-add/editArticle',
