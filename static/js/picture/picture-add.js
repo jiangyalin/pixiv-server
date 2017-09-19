@@ -3,9 +3,9 @@ $(function () {
     // 图片转码
     var pictures = [];
     $('#input-img').change(function () {
-        var file = this.files;
-        var k = ImgBase(file, 0);
-        console.log('k',k);
+        // var file = this.files;
+        // var k = ImgBase(file, 0);
+        // console.log('k',k);
         // for (var i = 0; i < file.length; i++) {
         //     var reader = new FileReader(); // 新建空文件属性对象
         //     if(file[i] != undefined)reader.readAsDataURL(file[i]); // 传入文件
@@ -18,24 +18,24 @@ $(function () {
         // }
     });
 
-    function ImgBase(fe, index) {
-        console.log('ppp')
-        console.log('fff',fe[index] != undefined)
-        if (fe[index] != undefined) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                console.log('oooo')
-                var imgBase64 = reader.result; // 将得到的文件转成data64编码
-                // $('.kkk').append('<img src="'+imgBase64+'"/>');
-                pictures.push(imgBase64);
-                console.log('k');
-                index++;
-                return ImgBase(fe, index);
-            }
-        }else {
-            return pictures;
-        }
-    }
+    // function ImgBase(fe, index) {
+    //     console.log('ppp')
+    //     console.log('fff',fe[index] != undefined)
+    //     if (fe[index] != undefined) {
+    //         var reader = new FileReader();
+    //         reader.onload = function() {
+    //             console.log('oooo')
+    //             var imgBase64 = reader.result; // 将得到的文件转成data64编码
+    //             // $('.kkk').append('<img src="'+imgBase64+'"/>');
+    //             pictures.push(imgBase64);
+    //             console.log('k');
+    //             index++;
+    //             return ImgBase(fe, index);
+    //         }
+    //     }else {
+    //         return pictures;
+    //     }
+    // }
 
     //提交数据
     $(".j-submit").click(function () {
@@ -47,11 +47,14 @@ $(function () {
         var user = '59bb6cd41767ff7f44844da2';
         // if (id == ''){
             //添加
-            AddPicture(img, title, text, user);
+            // AddPicture(img, title, text, user);
         // } else{
         //     //修改
         //     EditArticle(id, title, description, content, picture);
         // }
+        console.log(document.forms.namedItem("j-form")[0])
+        var formData = new FormData(document.forms.namedItem("j-form")[0]);
+        console.log(formData)
     });
     
     //取消
@@ -63,6 +66,7 @@ $(function () {
 
 //添加数据
 function AddPicture(img, title, text, user) {
+    var formData = new FormData($('#j-form')[0]);
     $.ajax({
         url : server.http + '/picture/picture-add/addPicture',
         data : {'img': img, 'title': title, 'text': text, 'user': user},
