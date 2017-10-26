@@ -4,7 +4,6 @@ module.exports = function (app) {
 
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());//解析参数
-
     app.get('/',function (req, res) {
         return res.redirect('/index');
     });

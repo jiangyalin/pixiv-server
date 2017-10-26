@@ -38,23 +38,41 @@ $(function () {
     // }
 
     //提交数据
+    var formData;
     $(".j-submit").click(function () {
+        var form = document.getElementById("form-1");
+        formData = new FormData(form)
         var img = pictures;
-        // console.log(img)
+        // // console.log(img)
         var title = $("#input-title").val();
         var text = $("#input-text").val();
-        // var user = $("#input-user").val();
-        var user = '59bb6cd41767ff7f44844da2';
-        // if (id == ''){
-            //添加
-            // AddPicture(img, title, text, user);
-        // } else{
-        //     //修改
-        //     EditArticle(id, title, description, content, picture);
-        // }
-        console.log(document.forms.namedItem("j-form")[0])
-        var formData = new FormData(document.forms.namedItem("j-form")[0]);
-        console.log(formData)
+        var user = $("#input-user").val();
+        // var user = '59bb6cd41767ff7f44844da2';
+        // // if (id == ''){
+        //     //添加
+        //     AddPicture(img, title, text, user);
+        // // } else{
+        // //     //修改
+        // //     EditArticle(id, title, description, content, picture);
+        // // }
+        // console.log(document.forms.namedItem("j-form")[0])
+        // var formData = new FormData(document.forms.namedItem("j-form")[0]);
+        // console.log(formData)
+    });
+    $('#input-img').fineUploader({
+        template: 'qq-template-gallery',
+        request: {
+            endpoint: server.http + '/picture/picture-add/addPicture'
+        },
+        thumbnails: {
+            placeholders: {
+                waitingPath: '/images/public/user_ui_01.png',
+                notAvailablePath: '/images/public/logo/icon-01.png'
+            }
+        },
+        validation: {
+            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
+        }
     });
     
     //取消
@@ -66,12 +84,26 @@ $(function () {
 
 //添加数据
 function AddPicture(img, title, text, user) {
-    var formData = new FormData($('#j-form')[0]);
+    // var form=document.getElementById("form-1");
+    // console.log(form);
+    var formData = new FormData($("#form-1")[0]);
+    // console.log(formData);
+    // formData.append("userfile", document.getElementById('input-img')[0]);
+    // console.log(formData);
+    // var oMyForm = new FormData();
+    // oMyForm.append("username", "Groucho");
+    // oMyForm.append("accountnum", 123456);
+    var file = document.getElementById('input-img').files[0];
+    console.log(formData.get("img"));
     $.ajax({
         url : server.http + '/picture/picture-add/addPicture',
-        data : {'img': img, 'title': title, 'text': text, 'user': user},
+        data : formData,
         type: 'post',
         dataType: 'json',
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
         success: function(data){
             if (JSON.parse(data) == 'success'){
                 $.alert({

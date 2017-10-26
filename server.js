@@ -13,6 +13,12 @@ app.engine('html',require('ejs').renderFile);//设置模板后缀名为.html
 app.set('view engine','html');
 
 app.use(express.static(path.join(__dirname,'static')));
+// 处理表单及文件上传的中间件
+app.use(require('express-formidable')({
+    uploadDir: path.join(__dirname, 'public/img'), // 上传文件目录
+    keepExtensions: true, // 保留后缀
+    multiples: true
+}));
 
 app.use(session({
     name: config.session.key,// 设置 cookie 中保存 session id 的字段名称
